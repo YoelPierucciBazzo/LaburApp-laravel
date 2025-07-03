@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\indexController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\usuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return "Holis";
-});
+
+Route::get('index', indexController::class);
 
 Route::get('perfil', function(){
     return "Este es el perfil";
@@ -15,17 +16,16 @@ Route::get('grafico', function(){
     return "Acá tiene que aparecer un gráfico (mejor si anda)";
 });
 
-Route::get('sesion', function(){
-    return "Inicio de sesión";
-});
+//----------- USUARIO ---------------//
 
-Route::get('registroUsuario', function(){
-    return "Registro de usuario";
-});
+Route::get('inicioSesion', [usuarioController::class,'inicioSesion']);
 
-Route::get('modificarUsuario', function(){
-    return "Modificar usuario";
-});
+Route::get('registroUsuario', [usuarioController::class,'registro']);
+
+Route::get('modificarUsuario', [usuarioController::class,'modificar'] );
+
+
+
 
 Route::get('solicitudes', function(){
     return "Acá aparecerán tus solicitudes";
