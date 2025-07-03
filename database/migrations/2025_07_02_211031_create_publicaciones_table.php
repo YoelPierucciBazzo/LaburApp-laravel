@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id('id_publicaciones');
-            $table->integer('id_usuario');
-            $table->integer('id_profesion');
             $table->text('nombre_publicacion');
             $table->text('descripcion');
             $table->char('fecha');
