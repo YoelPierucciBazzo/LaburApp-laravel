@@ -14,6 +14,7 @@ class usuarioController extends Controller
         public function inicioSesion()
     {
         return view('laburapp.inicioSesion');
+        
     }
 
         public function modificar()

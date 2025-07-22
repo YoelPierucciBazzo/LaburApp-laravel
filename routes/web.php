@@ -3,10 +3,12 @@
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\registroController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('index', indexController::class);
+Route::get('index', indexController::class)->name('index');
 
 Route::get('perfil', function(){
     return "Este es el perfil";
@@ -18,13 +20,18 @@ Route::get('grafico', function(){
 
 //----------- USUARIO ---------------//
 
-Route::get('inicioSesion', [usuarioController::class,'inicioSesion']);
+Route::get('inicioSesion', function () {
+    return view('laburapp.inicioSesion');
+})->name('inicioSesion');
 
-Route::get('registroUsuario', [usuarioController::class,'registro']);
+Route::post('inicioSesion', [loginController::class, 'autenticar'])->name('inicioSesion.usuario');
+
+
+Route::get('registroUsuario', [RegistroController::class, 'create'])->name('registro');
+Route::post('registroUsuario', [RegistroController::class, 'store'])->name('registro.store');
+Route::get('/inicio-sesion', [RegistroController::class, 'index'])->name('inicioSesion');
 
 Route::get('modificarUsuario', [usuarioController::class,'modificar'] );
-
-
 
 
 Route::get('solicitudes', function(){

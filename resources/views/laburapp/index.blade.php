@@ -2,6 +2,13 @@
 
 @section('titulo','Bienvenido a LABURAPP')
 
+@if (session('success'))
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+        {{ session('success') }}
+    </div>
+@endif
+
+
     <div class="grupo">
     @section('contenido')
     <main

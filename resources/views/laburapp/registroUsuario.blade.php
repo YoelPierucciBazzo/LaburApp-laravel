@@ -11,9 +11,10 @@
 
         <div class="centrar">
         <h1> Registro de Usuario </h1>
-        <form class="cuadro-inicio-sesion" onsubmit="return verificar()" method="post" action="alta_usuario.php" enctype="multipart/form-data">
+        <form class="cuadro-inicio-sesion" onsubmit="return verificar()" method="post" action="{{ route('registro.store') }}"enctype="multipart/form-data">
+        @csrf
             <div class='contenedor-input'>
-                <h3>Foto de perfil</h3><h6>Solo imagenes tipo "jpg/jpeg"</h6> <input type="file" name="imagen" required>
+                <h3>Foto de perfil</h3><h6>Solo imagenes tipo "jpg/jpeg"</h6> <input type="file" name="imagen" >
             </div>
             <div class='contenedor-input'>
                 <h3>Nombre</h3> <input type="text" placeholder="Ingrese su nombre..." name="nombre" id="nombre"  required autofocus>
@@ -33,13 +34,16 @@
             </div>
             <div class='contenedor-input'>
                 <h3>Seleccionar localidad</h3> 
-                <select name="localidad"  required>    
-                    <option value="" selected disabled > Seleccionar Localidad </option>
-                </select>
+            <select name="localidad" required>    
+            <option value="" selected disabled>Seleccionar Localidad</option>
+            @foreach ($localidades as $localidad)
+                <option value="{{ $localidad->id_localidad }}">{{ $localidad->nombre_localidad }}</option>
+            @endforeach
+            </select>   
             </div>
             <input class="btn-busqueda" type="submit" value="Crear usuario">
             <br>
-            <a href="index.php"> <h4 id="volver"> Volver al inicio </h4></a>
+                <a href="{{ url('index') }}"><h4>Volver al inicio</h4></a>
         </form>
 
 </body>
