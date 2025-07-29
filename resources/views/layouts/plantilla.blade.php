@@ -21,7 +21,14 @@
                     <li><a href="#" alt="indice">Principal</a></li>
                     <li><a href='perfil.php' alt="Ver Perfil">Ver Perfil</a></li>
                     <li><a href="grafico.php">Ver gráfico</a></li>
-                    <li><a href='cerrarlogin.php' alt="CERRAR SESIÓN">Cerrar sesión</a></li>            
+                    @if(session()->has('id_usuario'))
+                    <li><a href="{{ route('cerrarSesion.usuario') }}" alt="CERRAR SESIÓN">Cerrar sesión</a></li>
+                    <p>Bienvenido, {{ session('nombre') }} {{ session('apellido') }}</p>
+                    <img src="{{ asset(session('info-foto-perfil')) }}" alt="Foto de perfil" width="100">
+                    @else
+                    <p>No hay usuario logueado.</p>
+                   <a href="{{ route('inicioSesion.form') }}">Iniciar sesión</a>
+                    @endif           
                 </ul>
             </nav>
             <div class="perfil"> 

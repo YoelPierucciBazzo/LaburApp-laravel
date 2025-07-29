@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Usuario;
 
 use Illuminate\Http\Request;
 
@@ -16,22 +18,25 @@ class loginController extends Controller
 
         $usuario = DB::table('usuarios')
             ->where('mail', $mail)
-            ->where('contraseña', $pass)
             ->first();
 
-        if ($usuario) {
+        if ($usuario && hash::check($pass, $usuario->contraseña)) {
             Session::put('nombre', $usuario->nombre);
             Session::put('apellido', $usuario->apellido);
-            Session::put('pass', $usuario->contraseña);
             Session::put('contador', 1);
             Session::put('id_usuario', $usuario->id_usuario);
             Session::put('info-foto-perfil', $usuario->foto_perfil);
             Session::put('contador-fotoperfil', 1);
-
-            return redirect()->route('index')->with('success', 'Inicio de sesión exitoso. Bienvenido, ' . $usuario->nombre . ' ' . $usuario->apellido . '!')    
-                ->with('foto_perfil', $usuario->foto_perfil);
+            
+            return redirect()->route('index')->with('success', 'Inicio de sesión exitoso. Bienvenido, ' . $usuario->nombre . ' ' . $usuario->apellido . '!');
         } else {
             return redirect()->route('inicioSesion')->withErrors(['inicioSesion' => 'Usuario o contraseña incorrectos.']);
         }
+    }
+
+    function cerrarSesion()
+    {
+        Session::flush();
+        return redirect()->route('index')->with('success', 'Sesión cerrada exitosamente.');
     }
 }

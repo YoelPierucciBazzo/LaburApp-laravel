@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+    @extends('layouts.plantilla')
+    @section("titulo", "Perfil")
+
+@section('contenido')
+
+        </div>
+    </div>
+<main>
+    <h1>Binvenidos</h1>
+</main>
+ @endsection
+  

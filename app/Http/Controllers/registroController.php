@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
+
 class RegistroController extends Controller
 {
 public function formularioRegistro()
@@ -51,4 +52,5 @@ public function guardarUsuario(Request $request)
 
     return redirect()->route('inicioSesion.usuario')->with('success', 'Usuario registrado correctamente');
 }
+
 }

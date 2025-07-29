@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('index', indexController::class)->name('index');
 
 Route::get('perfil', function(){
-    return "Este es el perfil";
+    return view("laburapp.perfil");
 });
 
 Route::get('grafico', function(){
@@ -19,12 +19,9 @@ Route::get('grafico', function(){
 });
 
 //----------- USUARIO ---------------//
-
-Route::get('inicioSesion', function () {
-    return view('laburapp.inicioSesion');
-})->name('inicioSesion');
-
+Route::get('inicioSesion', function () {return view('laburapp.inicioSesion');})->name('inicioSesion.form');
 Route::post('inicioSesion', [loginController::class, 'autenticar'])->name('inicioSesion.usuario');
+Route::get('cerrarSesion', [loginController::class, 'cerrarSesion'])->name('cerrarSesion.usuario');
 
 
 Route::get('registroUsuario', [RegistroController::class, 'formularioRegistro'])->name('registro.formulario');
