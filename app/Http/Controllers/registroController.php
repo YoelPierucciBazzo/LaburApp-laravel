@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
-class registroController extends Controller
+class RegistroController extends Controller
 {
 public function formularioRegistro()
 {
@@ -16,117 +16,39 @@ public function formularioRegistro()
     return view('laburapp.registroUsuario', compact('localidades'));
 }
 
-
-
-public function registrar(Request $request)
+public function guardarUsuario(Request $request)
 {
-    dd($request->all()); // Para depurar y ver los datos recibidos
     $request->validate([
         'nombre' => 'required',
         'apellido' => 'required',
-        'pass' => 'required|min:4|max:10',
+        'pass' => 'required',
         'mail' => 'required|email',
         'telefono' => 'required',
-        'id_localidad' => 'required',
-        'foto_perfil' => 'required|image|mimes:jpg,jpeg|max:2048', 
+        'localidad' => 'required',
+        'imagen' => 'required|image|mimes:jpg,jpeg,png|max:2048',
     ]);
 
-    $mail = $request->mail;
-
-    $usuarioExistente = DB::table('usuarios')->where('mail', $mail)->exists();
-
-    if ($usuarioExistente) {
-        return redirect()->route('registro.form')->withErrors(['mail' => 'El usuario ya está registrado.']);
+    // Guardar imagen
+    if ($request->hasFile('imagen')) {
+        $imagenPath = $request->file('imagen')->store('imagenes', 'public');
+    } else {
+        return redirect()->back()->withErrors(['imagen' => 'Debe subir una imagen válida']);
     }
 
-    $nombre = $request->nombre;
-    $apellido = $request->apellido;
-    $pass = $request->pass; // Ideal: usar Hash::make($pass)
-    $telefono = $request->telefono;
-    $localidad = $request->localidad;
-
-    // Procesar imagen
-    $imagen = $request->file('imagen');
-    $nombreArchivo = '-' . $nombre . '-' . $apellido . '.' . $imagen->getClientOriginalExtension();
-    $ruta = 'imagenes/fotos_perfiles/' . $nombreArchivo;
-    $imagen->move(public_path('imagenes/fotos_perfiles'), $nombreArchivo);
-
-    // Insertar en base de datos
+    // Crear el usuario
     Usuario::create([
-        'nombre' => $request -> $nombre,
-        'apellido' => $request ->$apellido,
-        'contraseña' => bcrypt($request -> $pass),
-        'mail' => $request ->  $mail,
-        'telefono' => $request -> $telefono,
-        'id_localidad' => $request-> $localidad,
-        'foto_perfil' => $ruta,
+        'nombre' => $request->nombre,
+        'apellido' => $request->apellido,
+        'mail' => $request->mail,
+        'telefono' => $request->telefono,
+        'foto_perfil' => $imagenPath,
+        'contraseña' => bcrypt($request->pass),
+        'id_localidad' => $request->localidad,
+        'domicilio' => '', // o agregalo en el form
+        'informacion' => '', // lo mismo
+        'id_rating' => null,
     ]);
 
-    // Obtener el usuario recién creado
-    $usuario = DB::table('usuarios')->where('mail', $mail)->first();
-
-    // Crear sesión
-    Session::put('nombre', $usuario->nombre);
-    Session::put('apellido', $usuario->apellido);
-    Session::put('pass', $usuario->contraseña);
-    Session::put('contador', 1);
-    Session::put('id_usuario', $usuario->id_usuario);
-    Session::put('info-foto-perfil', $usuario->foto_perfil);
-    Session::put('contador-fotoperfil', 1);
-
-    return redirect()->route('index')->with('success', 'Usuario registrado con éxito.');
+    return redirect()->route('inicioSesion.usuario')->with('success', 'Usuario registrado correctamente');
 }
-}
-// End of registroController.php
-*/
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use App\Models\Usuario;
-use Illuminate\Support\Facades\Storage;
-
-class RegistroController extends Controller
-{
-    public function index()
-    {
-        return view('laburapp.inicioSesion');
-    }
-
-    public function create()
-    {
-            $localidades = DB::table('localidades')->orderBy('id_localidad')->get();
-             return view('laburapp.registroUsuario', compact('localidades'));
-    }
-
-    public function store(Request $request)
-    {
-        // Validación básica
-        $request->validate([
-            'nombre' => 'required|string',
-            'apellido' => 'required|string',
-            'pass' => 'required|string|min:4|max:10',
-            'mail' => 'required|email|unique:usuarios,mail',
-            'telefono' => 'required|string',
-            'localidad' => 'required|numeric',
-            'imagen' => 'required|image|mimes:jpeg,jpg|max:2048',
-        ]);
-
-        // Guardar la imagen
-        $ruta = $request->file('imagen')->store('public/imagenes');
-        $nombreArchivo = basename($ruta);
-
-        // Crear el usuario usando Eloquent
-        Usuario::create([
-            'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
-            'contraseña' => $request->pass, // o usar bcrypt() si querés encriptarla
-            'mail' => $request->mail,
-            'telefono' => $request->telefono,
-            'id_localidad' => $request->localidad,
-            'foto_perfil' => $nombreArchivo,
-        ]);
-
-        // Redirigir con mensaje
-        return redirect()->route('inicioSesion')->with('success', 'Usuario creado correctamente.');
-    }
 }

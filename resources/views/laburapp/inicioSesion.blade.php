@@ -9,6 +9,11 @@
     <meta name="keywords" content="Trabajo, empleo, rubro, emprendimiento, laburo">
 </head>
 <body>
+@if (session('success'))
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+        {{ session('success') }}
+    </div>
+@endif
     <header class="texto-inicio-sesion">
         <h1>Inicio de Sesión</h1>
     </header>

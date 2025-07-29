@@ -4,7 +4,7 @@ use App\Http\Controllers\indexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\registroController;
+use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,9 +27,8 @@ Route::get('inicioSesion', function () {
 Route::post('inicioSesion', [loginController::class, 'autenticar'])->name('inicioSesion.usuario');
 
 
-Route::get('registroUsuario', [RegistroController::class, 'create'])->name('registro');
-Route::post('registroUsuario', [RegistroController::class, 'store'])->name('registro.store');
-Route::get('/inicio-sesion', [RegistroController::class, 'index'])->name('inicioSesion');
+Route::get('registroUsuario', [RegistroController::class, 'formularioRegistro'])->name('registro.formulario');
+Route::post('registroUsuario', [RegistroController::class, 'guardarUsuario'])->name('registro.guardar');
 
 Route::get('modificarUsuario', [usuarioController::class,'modificar'] );
 

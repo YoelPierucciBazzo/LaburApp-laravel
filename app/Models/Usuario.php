@@ -6,18 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    protected $table = 'usuarios'; // Nombre de la tabla en la base de datos
-    protected $primaryKey = 'id_usuario'; // Clave primaria de la tabla
-    public $timestamps = false; // Desactivar los timestamps si no se usan
+    protected $table = 'usuarios';
+    protected $primaryKey = 'id_usuario'; // 👈 importante si tu clave primaria no se llama 'id'
 
-    // Definir las columnas que se pueden asignar masivamente
     protected $fillable = [
         'nombre',
         'apellido',
-        'contraseña',
         'mail',
+        'domicilio',
+        'foto_perfil',
+        'contraseña',
         'telefono',
+        'informacion',
         'id_localidad',
-        'foto_perfil'
+        'id_rating'
     ];
+
+    public $timestamps = true; // ya que tenés created_at y updated_at
 }

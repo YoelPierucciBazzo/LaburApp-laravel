@@ -11,7 +11,16 @@
 
         <div class="centrar">
         <h1> Registro de Usuario </h1>
-        <form class="cuadro-inicio-sesion" onsubmit="return verificar()" method="post" action="{{ route('registro.store') }}"enctype="multipart/form-data">
+        @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <form class="cuadro-inicio-sesion" method="POST" action="{{ route('registro.guardar') }}" enctype="multipart/form-data">
         @csrf
             <div class='contenedor-input'>
                 <h3>Foto de perfil</h3><h6>Solo imagenes tipo "jpg/jpeg"</h6> <input type="file" name="imagen" >
