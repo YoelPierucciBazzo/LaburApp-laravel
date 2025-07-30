@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -16,17 +18,10 @@ class loginController extends Controller
         $mail = $request->input('mail');
         $pass = $request->input('pass');
 
-        $usuario = DB::table('usuarios')
-            ->where('mail', $mail)
-            ->first();
+        $usuario = Usuario::where('mail', $mail)->first();
 
         if ($usuario && hash::check($pass, $usuario->contraseña)) {
-            Session::put('nombre', $usuario->nombre);
-            Session::put('apellido', $usuario->apellido);
-            Session::put('contador', 1);
-            Session::put('id_usuario', $usuario->id_usuario);
-            Session::put('info-foto-perfil', $usuario->foto_perfil);
-            Session::put('contador-fotoperfil', 1);
+            Auth::login($usuario);
             
             return redirect()->route('index')->with('success', 'Inicio de sesión exitoso. Bienvenido, ' . $usuario->nombre . ' ' . $usuario->apellido . '!');
         } else {
@@ -36,7 +31,7 @@ class loginController extends Controller
 
     function cerrarSesion()
     {
-        Session::flush();
+        Auth::logout();
         return redirect()->route('index')->with('success', 'Sesión cerrada exitosamente.');
     }
 }

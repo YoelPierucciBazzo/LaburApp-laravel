@@ -11,13 +11,7 @@
 
         <div class="centrar">
         <h1> Registro de Usuario </h1>
-        @if ($errors->any())
     <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
     </div>
 @endif
         <form class="cuadro-inicio-sesion" method="POST" action="{{ route('registro.guardar') }}" enctype="multipart/form-data">

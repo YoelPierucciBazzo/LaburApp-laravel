@@ -10,13 +10,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('index', indexController::class)->name('index');
 
-Route::get('perfil', function(){
-    return view("laburapp.perfil");
-});
+Route::get('perfil', function(){return view("laburapp.perfil");})->name('perfil');
 
-Route::get('grafico', function(){
-    return "Acá tiene que aparecer un gráfico (mejor si anda)";
-});
+Route::get('grafico', function(){return "Acá tiene que aparecer un gráfico (mejor si anda)";})->name('grafico');
 
 //----------- USUARIO ---------------//
 Route::get('inicioSesion', function () {return view('laburapp.inicioSesion');})->name('inicioSesion.form');
@@ -27,7 +23,7 @@ Route::get('cerrarSesion', [loginController::class, 'cerrarSesion'])->name('cerr
 Route::get('registroUsuario', [RegistroController::class, 'formularioRegistro'])->name('registro.formulario');
 Route::post('registroUsuario', [RegistroController::class, 'guardarUsuario'])->name('registro.guardar');
 
-Route::get('modificarUsuario', [usuarioController::class,'modificar'] );
+Route::get('modificarUsuario', [usuarioController::class,'modificar'])->name('modificar.usuario');
 
 
 Route::get('solicitudes', function(){
