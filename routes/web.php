@@ -23,7 +23,9 @@ Route::get('cerrarSesion', [loginController::class, 'cerrarSesion'])->name('cerr
 Route::get('registroUsuario', [RegistroController::class, 'formularioRegistro'])->name('registro.formulario');
 Route::post('registroUsuario', [RegistroController::class, 'guardarUsuario'])->name('registro.guardar');
 
-Route::get('modificarUsuario', [usuarioController::class,'modificar'])->name('modificar.usuario');
+Route::get('modificarUsuario', [usuarioController::class, 'editarPerfil'])->name('formulario.modificar');
+Route::post('modificarUsuario', [usuarioController::class, 'modificar'])->name('actualizar.usuario');
+
 
 
 Route::get('solicitudes', function(){

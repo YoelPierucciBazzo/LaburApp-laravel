@@ -13,7 +13,6 @@
         <h1> Registro de Usuario </h1>
     <div>
     </div>
-@endif
         <form class="cuadro-inicio-sesion" method="POST" action="{{ route('registro.guardar') }}" enctype="multipart/form-data">
         @csrf
             <div class='contenedor-input'>

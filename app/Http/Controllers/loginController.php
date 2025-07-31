@@ -25,7 +25,7 @@ class loginController extends Controller
             
             return redirect()->route('index')->with('success', 'Inicio de sesión exitoso. Bienvenido, ' . $usuario->nombre . ' ' . $usuario->apellido . '!');
         } else {
-            return redirect()->route('inicioSesion')->withErrors(['inicioSesion' => 'Usuario o contraseña incorrectos.']);
+            return redirect()->route('inicioSesion.form')->withErrors(['inicioSesion' => 'Usuario o contraseña incorrectos.']);
         }
     }
 

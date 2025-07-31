@@ -1,25 +1,55 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Localidad;
 
+use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class usuarioController extends Controller
 {
-        public function registro()
+    public function modificar(Request $request)
     {
-        return view('laburapp.registroUsuario');
-    }
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'foto_perfil' => 'nullable|image|max:2048',
+            'informacion' => 'nullable|string|max:500',
+            'telefono' => 'nullable|string|max:15',
+            'domicilio' => 'nullable|string|max:255',
+            'mail' => 'required|email|max:255',
+            'id_localidad' => 'required|exists:localidades,id_localidad',
+            'nueva-contraseña' => 'nullable|string|min:8|confirmed',
+        ]);
 
-        public function inicioSesion()
-    {
-        return view('laburapp.inicioSesion');
-        
-    }
+       /** @var \App\Models\Usuario $usuario */
+        $usuario = Auth::user();
 
-        public function modificar()
-    {
-        return view('laburapp.modificarUsuario');
-    }
+        $usuario->update($request->only([
+            'nombre',
+            'apellido',
+            'informacion',
+            'telefono',
+            'domicilio',
+            'mail',
+            'id_localidad',
+            'foto_perfil',
+        ]));
 
+     
+        if ($request->filled('nueva-contraseña')) {
+            $usuario->contraseña = Hash::make($request->input('nueva-contraseña'));
+            $usuario->save();
+        }
+
+        return redirect()->route('perfil')->with('success', 'Usuario modificado correctamente.');
+    } 
+    
+    public function editarPerfil() {
+    $localidades = Localidad::all();
+    $usuario = auth::user();
+    return view('laburapp.modificarUsuario', compact('usuario', 'localidades'));;
+}
 }
