@@ -1,5 +1,4 @@
 @extends('layouts.plantilla')
-
 @section('titulo','Bienvenido a LABURAPP')
 
 @if (session('success'))

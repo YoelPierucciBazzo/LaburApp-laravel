@@ -1,10 +1,19 @@
 @extends('layouts.plantilla');
-
+@section('titulo', 'Modificar Usuario') 
 @section('contenido')
 <main>
     <form action="{{route('actualizar.usuario')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <img src="{{ asset('storage/' . auth()->user()->foto_perfil )}}" class='fotoperfil'>
+        <h1>Modificar Usuario</h1>
+        <div class='contenedor-datos'>
+            <label for="foto_perfil">Foto de Perfil:</label>
+            @if(Auth::user()->foto_perfil)
+                <img src="{{ asset('storage/' . Auth::user()->foto_perfil) }}" alt="Foto de perfil" width="150">
+            @else
+                <img src="{{ asset('images/icono_usuario.png') }}" alt="Sin foto" width="150">
+            @endif
+            <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*">
+        </div>
         <div class='contenedor-datos'><h2>Nombre y Apellido</h2></div>
         <div class='contenedor-datos'> <input type="text" name="nombre" value="{{auth()->user()->nombre}}"></div>
         <div class='contenedor-datos'> <input type="text" name="apellido" value="{{auth()->user()->apellido}}"></div>
@@ -27,7 +36,7 @@
         <div><input type="text" name="mail" value="{{auth()->user()->mail}}"></div>
         <div class='contenedor-datos'> <h4>Localidad</h4></div>
         <div> <select name="id_localidad" required>
-    @foreach ($localidades as $localidad)
+        @foreach ($localidades as $localidad)
         <option value="{{ $localidad->id_localidad }}"
             {{ $usuario->id_localidad == $localidad->id_localidad ? 'selected' : '' }}>
             {{ $localidad->nombre_localidad }}
@@ -37,6 +46,10 @@
         </div>
         <input type="submit" value="Actualizar perfil" class='boton'>
         <input type="button" class="boton" value="Volver" onClick='location="{{ route('perfil') }}"'>
-        </form>
+    </form>
+    <form action="{{ route('eliminar.usuario') }}" method="POST" onsubmit="return confirm('¿Seguro que querés eliminar tu cuenta?')">
+    @csrf
+    <button type="submit" class="boton">Eliminar cuenta</button>
+</form>
 </main>
 @endsection

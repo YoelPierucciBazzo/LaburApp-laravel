@@ -3,6 +3,7 @@
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\publicacionController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +13,6 @@ Route::get('index', indexController::class)->name('index');
 
 Route::get('perfil', function(){return view("laburapp.perfil");})->name('perfil');
 
-Route::get('grafico', function(){return "Acá tiene que aparecer un gráfico (mejor si anda)";})->name('grafico');
 
 //----------- USUARIO ---------------//
 Route::get('inicioSesion', function () {return view('laburapp.inicioSesion');})->name('inicioSesion.form');
@@ -25,16 +25,19 @@ Route::post('registroUsuario', [RegistroController::class, 'guardarUsuario'])->n
 
 Route::get('modificarUsuario', [usuarioController::class, 'editarPerfil'])->name('formulario.modificar');
 Route::post('modificarUsuario', [usuarioController::class, 'modificar'])->name('actualizar.usuario');
+Route::post('eliminarUsuario', [usuarioController::class, 'eliminarPerfil'])->name('eliminar.usuario');
 
+//----------- PUBLICACIONES ---------------//
+Route::get('publicaciones', [publicacionController::class, 'verFormulario'])->name('formulario.publicacion');
+Route::post('publicaciones', [publicacionController::class, 'crearPublicacion'])->name('crear.publicacion');
+Route::get('misPublicaciones', [publicacionController::class, 'misPublicaciones'])->name('misPublicaciones');
+Route::post('eliminarPublicacion/{id}', [publicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
 
 
 Route::get('solicitudes', function(){
     return "Acá aparecerán tus solicitudes";
 });
 
-Route::get('publicaciones', function(){
-    return "Acá están las publicaciones";
-});
 
 Route::get('modificarPublicaciones', function(){
     return "Modificar publicación";

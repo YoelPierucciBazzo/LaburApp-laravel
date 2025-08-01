@@ -45,8 +45,8 @@ public function guardarUsuario(Request $request)
         'foto_perfil' => $imagenPath,
         'contraseña' => bcrypt($request->pass),
         'id_localidad' => $request->localidad,
-        'domicilio' => '', // o agregalo en el form
-        'informacion' => '', // lo mismo
+        'domicilio' => '',
+        'informacion' => '',
         'id_rating' => null,
     ]);
 

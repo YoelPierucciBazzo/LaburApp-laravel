@@ -20,7 +20,7 @@
                     <ul class="nav-list"> 
                     <li><a href="{{  route('index')}}" alt="indice">Principal</a></li>
                     <li><a href="{{ route ('perfil')}}" alt="Ver Perfil">Ver Perfil</a></li>
-                    <li><a href="{{  route('grafico')}}" alt="Ver grafico"> Ver gráfico</a></li>
+                    <li><a href="{{  route('misPublicaciones')}}" alt="Ver publicaciones"> Mis publicaciones</a></li>
                     @auth
                     <li><a href="{{ route('cerrarSesion.usuario') }}" alt="CERRAR SESIÓN">Cerrar sesión</a></li>
                     <p>Bienvenido, {{ auth()->user()->nombre }} {{ auth()->user()->apellido }}</p>
