@@ -15,10 +15,6 @@ class publicacionController extends Controller
     return view('laburapp.crearPublicacion', compact('profesiones'));
 }
 
-public function misPublicaciones() {
-    $publicaciones = Publicacion::where('id_usuario', Auth::user()->id_usuario)->with('profesion')->get();
-    return view('laburapp.misPublicaciones', compact('publicaciones'));}
-
     public function crearPublicacion(Request $request){
         $request -> validate([
         'nombre_publicacion' => 'required|string|max:255',
@@ -47,6 +43,11 @@ public function misPublicaciones() {
         return redirect()->route('misPublicaciones')->with('success', 'Publicación creada correctamente');
     }
 
+    public function misPublicaciones() {
+        $publicaciones = Publicacion::where('id_usuario', Auth::user()->id_usuario)->with('profesion')->get();
+        return view('laburapp.misPublicaciones', compact('publicaciones'));}
+
+
     // Método para eliminar una publicación
     
 public function eliminarPublicacion($id)
@@ -66,7 +67,53 @@ public function eliminarPublicacion($id)
     return redirect()->route('misPublicaciones')->with('success', 'Publicación eliminada correctamente.');
     
 }
+
+public function cargarFormularioModificar($id)
+{
+    $publicacion = Publicacion::findOrFail($id);
+    $profesiones = Profesion::all();
+    
+    if ($publicacion->id_usuario !== Auth::user()->id_usuario) {
+        return redirect()->back()->withErrors(['error' => 'No tienes permiso para editar esta publicación.']);
+    }
+
+    return view('laburapp.modificarPublicaciones', compact('publicacion', 'profesiones'));
+
 }
 
+public function modificarPublicacion(Request $request, $id)
+{
+    $publicacion = Publicacion::findOrFail($id);
 
+    if ($publicacion->id_usuario !== Auth::user()->id_usuario) {
+        return redirect()->back()->withErrors(['error' => 'No tienes permiso para editar esta publicación.']);
+    }
 
+    $request->validate([
+        'nombre_publicacion' => 'required|string|max:255',
+        'descripcion' => 'required|string|max:1000',
+        'fecha' => 'required|date',
+        'foto_portada' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'id_profesion' => 'required|exists:profesiones,id_profesion',
+    ]);
+
+    if ($request->hasFile('foto_portada')) {
+        if ($publicacion->foto_portada && Storage::disk('public')->exists($publicacion->foto_portada)) {
+            Storage::disk('public')->delete($publicacion->foto_portada);
+        }
+        $imagenPath = $request->file('foto_portada')->store('imagenes', 'public');
+    } else {
+        $imagenPath = $publicacion->foto_portada;
+    }
+
+    $publicacion->update([
+        'nombre_publicacion' => $request->nombre_publicacion,
+        'descripcion' => $request->descripcion,
+        'fecha' => $request->fecha,
+        'foto_portada' => $imagenPath,
+        'id_profesion' => $request->id_profesion,
+    ]);
+
+    return redirect()->route('misPublicaciones')->with('success', 'Publicación modificada correctamente');
+}
+}

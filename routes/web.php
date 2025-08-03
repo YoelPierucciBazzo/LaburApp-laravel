@@ -39,9 +39,8 @@ Route::get('solicitudes', function(){
 });
 
 
-Route::get('modificarPublicaciones', function(){
-    return "Modificar publicación";
-});
+Route::get('modificarPublicaciones/{id}', [publicacionController::class, 'cargarFormularioModificar'])->name('formulario.modificar.publicacion');
+Route::post('modificarPublicaciones/{id}', [publicacionController::class, 'modificarPublicacion'])->name('modificar.publicacion');
 
 Route::get('buscarPublicaciones', function(){
     return "Acá están las publicaciones";
