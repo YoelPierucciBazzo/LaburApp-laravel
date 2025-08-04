@@ -35,7 +35,7 @@ Route::post('eliminarPublicacion/{id}', [publicacionController::class, 'eliminar
 
 Route::get('modificarPublicaciones/{id}', [publicacionController::class, 'cargarFormularioModificar'])->name('formulario.modificar.publicacion');
 Route::post('modificarPublicaciones/{id}', [publicacionController::class, 'modificarPublicacion'])->name('modificar.publicacion');
-
+Route::get('verPublicacion/{id}', [publicacionController::class, 'verPublicacion'])->name('ver.publicacion');
 
 Route::get('solicitudes', function(){
     return "Acá aparecerán tus solicitudes";

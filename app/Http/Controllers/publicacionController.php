@@ -127,4 +127,9 @@ public function buscarPublicaciones(Request $request)
 
     return view('laburapp.buscarPublicaciones', compact('publicaciones'));
 }
+
+public function verPublicacion($id){
+    $publicacion = Publicacion::with(['profesion', 'usuario'])->FindOrFail($id);
+    return view('laburapp.verPublicacion', compact('publicacion'));
+}
 }
