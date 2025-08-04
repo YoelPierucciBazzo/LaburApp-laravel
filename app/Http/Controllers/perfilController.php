@@ -12,7 +12,7 @@ class PerfilController extends Controller
 
 public function perfil()
 {
-    $usuario = Auth::user(); // O cargar relaciones: ->with('posts')->first()
+    $usuario = Auth::user();
     return view('perfil', compact('usuario'));
 }
 

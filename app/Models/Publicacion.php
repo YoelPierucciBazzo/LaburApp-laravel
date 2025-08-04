@@ -24,4 +24,8 @@ class Publicacion extends Model
 {
     return $this->belongsTo(Profesion::class, 'id_profesion', 'id_profesion');
 }
+
+    public function usuario(){
+        return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
+    }
 }

@@ -13,9 +13,9 @@
     <main
     class="cabeceraindex">
         <h1 class="titulo">Ponete a laburar</h1>
-        <form class="busqueda" action="barra-buscador.php">
+        <form class="busqueda" action="{{route('buscar.publicaciones')}}" method="GET">
             <input class="cajaDeBusqueda" type="search" name="busq" class="caja" placeholder="Busqueda por palabra" required>
-            <input class="btn-busqueda" type="submit" value="Enviar" class="boton" name="Enviar">
+            <input class="btn-busqueda" type="submit" value="Enviar" class="boton" onclick="location.href='{{ route('buscar.publicaciones') }}'">
         </form>
     </div>
     <div class="seccion">

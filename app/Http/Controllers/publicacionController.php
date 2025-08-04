@@ -116,4 +116,15 @@ public function modificarPublicacion(Request $request, $id)
 
     return redirect()->route('misPublicaciones')->with('success', 'Publicación modificada correctamente');
 }
+
+public function buscarPublicaciones(Request $request)
+{
+    $busqueda = $request->input('busq');
+    $publicaciones = Publicacion::where('nombre_publicacion', 'like', '%' . $busqueda . '%')
+        ->orWhere('descripcion', 'like', '%' . $busqueda . '%')
+        ->with(['profesion','usuario'])
+        ->get();
+
+    return view('laburapp.buscarPublicaciones', compact('publicaciones'));
+}
 }

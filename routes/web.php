@@ -9,7 +9,7 @@ use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('index', indexController::class)->name('index');
+Route::get('/', indexController::class)->name('index');
 
 Route::get('perfil', function(){return view("laburapp.perfil");})->name('perfil');
 
@@ -33,18 +33,16 @@ Route::post('publicaciones', [publicacionController::class, 'crearPublicacion'])
 Route::get('misPublicaciones', [publicacionController::class, 'misPublicaciones'])->name('misPublicaciones');
 Route::post('eliminarPublicacion/{id}', [publicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
 
+Route::get('modificarPublicaciones/{id}', [publicacionController::class, 'cargarFormularioModificar'])->name('formulario.modificar.publicacion');
+Route::post('modificarPublicaciones/{id}', [publicacionController::class, 'modificarPublicacion'])->name('modificar.publicacion');
+
 
 Route::get('solicitudes', function(){
     return "Acá aparecerán tus solicitudes";
 });
 
 
-Route::get('modificarPublicaciones/{id}', [publicacionController::class, 'cargarFormularioModificar'])->name('formulario.modificar.publicacion');
-Route::post('modificarPublicaciones/{id}', [publicacionController::class, 'modificarPublicacion'])->name('modificar.publicacion');
-
-Route::get('buscarPublicaciones', function(){
-    return "Acá están las publicaciones";
-});
+Route::get('buscarPublicaciones', [publicacionController::class , 'buscarPublicaciones'])->name('buscar.publicaciones');
 
 Route::get('crearPublicacion', function(){
     return "Crear publicación";
