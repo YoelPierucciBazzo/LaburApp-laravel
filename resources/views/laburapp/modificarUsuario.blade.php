@@ -1,55 +1,111 @@
-@extends('layouts.plantilla');
+@extends('layouts.plantilla')
 @section('titulo', 'Modificar Usuario') 
 @section('contenido')
-<main>
-    <form action="{{route('actualizar.usuario')}}" method="POST" enctype="multipart/form-data">
-        @csrf
+
+<main class="centrar">
+    <div class="cuadro-modificar-perfil">
         <h1>Modificar Usuario</h1>
-        <div class='contenedor-datos'>
-            <label for="foto_perfil">Foto de Perfil:</label>
-            @if(Auth::user()->foto_perfil)
-                <img src="{{ asset('storage/' . Auth::user()->foto_perfil) }}" alt="Foto de perfil" width="150">
-            @else
-                <img src="{{ asset('images/icono_usuario.png') }}" alt="Sin foto" width="150">
-            @endif
-            <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*">
-        </div>
-        <div class='contenedor-datos'><h2>Nombre y Apellido</h2></div>
-        <div class='contenedor-datos'> <input type="text" name="nombre" value="{{auth()->user()->nombre}}"></div>
-        <div class='contenedor-datos'> <input type="text" name="apellido" value="{{auth()->user()->apellido}}"></div>
-        <div><h2>Contraseña</h2></div>
-        <div>
-            <label for="nueva-contraseña">Nueva Contraseña:</label>
-            <input type="password" id="nueva-contraseña" name="nueva-contraseña">
-        </div>
-        <div>
-        <label for="nueva-contraseña_confirmation">Confirmar Contraseña:</label>
-        <input type="password" id="nueva-contraseña_confirmation" name="nueva-contraseña_confirmation">
-        </div>
-        <div><h2>Informacion</h2></div>
-        <textarea id="info-input" name="informacion" cols="30" rows="10">{{ auth()->user()->informacion }}</textarea>
-        <div class='contenedor-datos'> <h4>Número de Teléfono:</h4></div>
-        <div><input type="tel" name="telefono" value="{{  auth()->user()->telefono}}"></div>
-        <div class='contenedor-datos'> <h4>Domicilio</h4></div>
-        <div><input type="text" name="domicilio" value="{{auth()->user()->domicilio}}"></div>
-        <div class='contenedor-datos'> <h4>Mail</h4></div>
-        <div><input type="text" name="mail" value="{{auth()->user()->mail}}"></div>
-        <div class='contenedor-datos'> <h4>Localidad</h4></div>
-        <div> <select name="id_localidad" required>
-        @foreach ($localidades as $localidad)
-        <option value="{{ $localidad->id_localidad }}"
-            {{ $usuario->id_localidad == $localidad->id_localidad ? 'selected' : '' }}>
-            {{ $localidad->nombre_localidad }}
-        </option>
-    @endforeach
-</select>
-        </div>
-        <input type="submit" value="Actualizar perfil" class='boton'>
-        <input type="button" class="boton" value="Volver" onClick='location="{{ route('perfil') }}"'>
-    </form>
-    <form action="{{ route('eliminar.usuario') }}" method="POST" onsubmit="return confirm('¿Seguro que querés eliminar tu cuenta?')">
-    @csrf
-    <button type="submit" class="boton">Eliminar cuenta</button>
-</form>
+
+        <form action="{{ route('actualizar.usuario') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <!-- FOTO DE PERFIL -->
+            <div class="contenedor-input">
+                <label for="foto_perfil"><strong>Foto de Perfil:</strong></label>
+                @if(Auth::user()->foto_perfil)
+                    <img id="imagenPreview" src="{{ asset('storage/' . Auth::user()->foto_perfil) }}" class="fotoperfil" >
+                @else
+                    <img id="imagenPreview" src="{{ asset('images/icono_usuario.png') }}" class="fotoperfil" width="150">
+                @endif
+                <input type="file" name="foto_perfil" id="foto_perfil" onchange="previewImage(event)">
+            </div>
+
+            <!-- NOMBRE Y APELLIDO -->
+            <div class="contenedor-input">
+                <h3>Nombre</h3>
+                <input type="text" name="nombre" value="{{ auth()->user()->nombre }}">
+            </div>
+
+            <div class="contenedor-input">
+                <h3>Apellido</h3>
+                <input type="text" name="apellido" value="{{ auth()->user()->apellido }}">
+            </div>
+
+            <!-- CONTRASEÑA -->
+            <div class="contenedor-input">
+                <h3>Nueva Contraseña</h3>
+                <input type="password" name="nueva-contraseña">
+            </div>
+
+            <div class="contenedor-input">
+                <h3>Confirmar Contraseña</h3>
+                <input type="password" name="nueva-contraseña_confirmation">
+            </div>
+
+            <!-- INFORMACIÓN -->
+            <div class="contenedor-input">
+                <h3>Información</h3>
+                <textarea id="info-input" name="informacion">{{ auth()->user()->informacion }}</textarea>
+            </div>
+
+            <!-- TELÉFONO -->
+            <div class="contenedor-input">
+                <h3>Teléfono</h3>
+                <input type="tel" name="telefono" value="{{ auth()->user()->telefono }}">
+            </div>
+
+            <!-- DOMICILIO -->
+            <div class="contenedor-input">
+                <h3>Domicilio</h3>
+                <input type="text" name="domicilio" value="{{ auth()->user()->domicilio }}">
+            </div>
+
+            <!-- MAIL -->
+            <div class="contenedor-input">
+                <h3>Mail</h3>
+                <input type="email" name="mail" value="{{ auth()->user()->mail }}">
+            </div>
+
+            <!-- LOCALIDAD -->
+            <div class="contenedor-input">
+                <h3>Localidad</h3>
+                <select name="id_localidad" required>
+                    @foreach ($localidades as $localidad)
+                        <option value="{{ $localidad->id_localidad }}"
+                            {{ $usuario->id_localidad == $localidad->id_localidad ? 'selected' : '' }}>
+                            {{ $localidad->nombre_localidad }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- BOTONES -->
+            <div class="centrar-boton">
+                <input type="submit" value="Actualizar perfil" class="boton">
+                <input type="button" value="Volver" class="boton" onclick="location='{{ route('perfil') }}'">
+            </div>
+        </form>
+
+        <!-- BOTÓN ELIMINAR -->
+        <form action="{{ route('eliminar.usuario') }}" method="POST" onsubmit="return confirm('¿Seguro que querés eliminar tu cuenta?')">
+            @csrf
+            <button type="submit" class="boton">Eliminar cuenta</button>
+        </form>
+    </div>
 </main>
+
+<script>
+function previewImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = e => document.getElementById('imagenPreview').src = e.target.result;
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+
 @endsection
+
+
+

@@ -2,15 +2,16 @@
 @section('titulo','Modificar Publicación')
 @section('contenido')
 <h1>Modificar publicación</h1>
-<form action="{{ route('modificar.publicacion', $publicacion->id_publicaciones) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('modificar.publicacion', $publicacion->id_publicaciones) }}" method="POST" enctype="multipart/form-data" class="cuadro-crear-formulario" >
     @csrf
 
     <label for="nombre_publicacion">Título: </label>
-    <input type="text" name="nombre_publicacion" id="nombre_publicacion" value="{{ $publicacion->nombre_publicacion }}">
+    <input class="titulo-publicacion" type="text" name="nombre_publicacion" id="nombre_publicacion" value="{{ $publicacion->nombre_publicacion }}">
     <br><br>
 
     <label for="descripcion">Descripción:</label>
-    <textarea name="descripcion" id="descripcion" cols="30" rows="10">{{ $publicacion->descripcion }}</textarea>
+    <br><br>
+    <textarea class="cuadro-crear-formulario" name="descripcion" id="descripcion" cols="30" rows="10">{{ $publicacion->descripcion }}</textarea>
     <br><br>
 
     <label for="profesion">Profesión:</label>
@@ -26,9 +27,12 @@
     <label for="fecha">Fecha:</label>
     <input type="date" name="fecha" id="fecha" value="{{ $publicacion->fecha }}">
     <br><br>
-    <label for="foto">Foto:</label>
+    <label for="foto" >Foto:</label>
     <br>
-    <img src="{{ asset('storage/' . $publicacion->foto_portada) }}" alt="Foto de la publicación" style="max-width:200px;">
+    <br>
+    <div class="contenedor-foto-mod-publi">
+    <img id="fotopubli" src="{{ asset('storage/' . $publicacion->foto_portada) }}" alt="Foto de la publicación" >
+    </div>
     <br>
     <input type="file" name="foto_portada" accept="image/*">
     <br><br>

@@ -38,7 +38,7 @@
                 <input class="btn-busqueda" type="submit" value="Iniciar Sesión">
                 <br> <br>
                 <a href="{{ url('registroUsuario') }}"><h4>¿No tenés cuenta? REGISTRATE ACÁ</h4></a> 
-                <a href="{{ url('index') }}"><h4>Volver</h4></a>
+                <a href="{{ route('index') }}"><h4>Volver</h4></a>
             </form>
         </div>
     </main> 

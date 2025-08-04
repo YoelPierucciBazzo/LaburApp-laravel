@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Localidad;
 
 use App\Models\Usuario;
+use App\Models\Publicacion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -63,5 +64,15 @@ class usuarioController extends Controller
         $usuario ->delete();
         return redirect()->route('index')->with('success', 'Cuenta eliminada correctamente.');
     }
-    
+    public function verUsuario($id){
+        /** @var \App\Models\Usuario $usuario */
+        $usuario = Auth::user();
+        $publicacion = Publicacion::findOrFail($id);
+        if ($usuario && $usuario->id_usuario == $publicacion->id_usuario){
+            return view('laburapp.perfil', ['usuario' => $usuario]);
+        }
+        else {
+            $usuario = $publicacion->usuario;
+            return view('laburapp.verPerfilDeOtro', compact('usuario'));}
+    }
 }

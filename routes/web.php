@@ -9,7 +9,7 @@ use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', indexController::class)->name('index');
+Route::get('index', indexController::class)->name('index');
 
 Route::get('perfil', function(){return view("laburapp.perfil");})->name('perfil');
 
@@ -20,17 +20,18 @@ Route::post('inicioSesion', [loginController::class, 'autenticar'])->name('inici
 Route::get('cerrarSesion', [loginController::class, 'cerrarSesion'])->name('cerrarSesion.usuario');
 
 
-Route::get('registroUsuario', [RegistroController::class, 'formularioRegistro'])->name('registro.formulario');
 Route::post('registroUsuario', [RegistroController::class, 'guardarUsuario'])->name('registro.guardar');
+Route::get('registroUsuario', [RegistroController::class, 'formularioRegistro'])->name('registro.formulario');
 
 Route::get('modificarUsuario', [usuarioController::class, 'editarPerfil'])->name('formulario.modificar');
 Route::post('modificarUsuario', [usuarioController::class, 'modificar'])->name('actualizar.usuario');
 Route::post('eliminarUsuario', [usuarioController::class, 'eliminarPerfil'])->name('eliminar.usuario');
+Route::get('verPerfilDeOtro/{id}', [usuarioController::class, 'verUsuario'])->name('ver.usuario');
 
 //----------- PUBLICACIONES ---------------//
 Route::get('publicaciones', [publicacionController::class, 'verFormulario'])->name('formulario.publicacion');
 Route::post('publicaciones', [publicacionController::class, 'crearPublicacion'])->name('crear.publicacion');
-Route::get('misPublicaciones', [publicacionController::class, 'misPublicaciones'])->name('misPublicaciones');
+Route::get('misPublicaciones', [publicacionController::class, 'misPublicaciones'])->name('misPublicaciones')>
 Route::post('eliminarPublicacion/{id}', [publicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
 
 Route::get('modificarPublicaciones/{id}', [publicacionController::class, 'cargarFormularioModificar'])->name('formulario.modificar.publicacion');

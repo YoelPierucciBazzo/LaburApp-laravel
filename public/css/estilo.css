@@ -86,7 +86,7 @@ header .fotoperfil{
   width: 10vw;
   height: 10vw;
   border-radius: 30%;
-  height: 10dvh;
+  height: auto;
   width: auto;
   margin: 1dvh;
   margin-top: 5dvh;
@@ -433,8 +433,10 @@ header b {
 }
 
 .fotoperfil{
-  width: 20vw;
+  width:  70%;
   height: auto;
+  justify-content: center;
+  align-items: center;   
 }
 /* -------------------------CSS del Contenido Principal------------------------- */
 .trabajos-disponibles {
@@ -763,9 +765,35 @@ select {
   margin: 5vh;
 
 }
+.contenedor-foto-mod-publi {
+    display: flex;
+    justify-content: center;
+    margin: 2vh 0;
+}
+
+.contenedor-foto-mod-publi img {
+    max-width: 300px; /* o el tamaño que prefieras */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/*.contenedor-foto-mod-publi{
+
+  display: flex;
+  align-items: center;   
+  justify-content: center;
+  height: 10vw;
+
+ 
+
+}*/
+
 .contenedor-foto{
   display: flex;
   justify-content: center;
+  height: 20vw;
+  width: 80vw;
 }
 .mod-perfil{
   display: inline;
@@ -929,6 +957,7 @@ footer h3{
     width: 20vw; 
     height: auto;
     margin: 10px 0;
+     justify-content: center;
   }
 
 
@@ -974,8 +1003,10 @@ footer h3{
   }
 
   #fotopubli {
-    height: auto;
-    max-height: 200px; 
+  width:  auto;
+  height: auto;
+  justify-content: center;
+  align-items: center;   
   }
 
   .link {

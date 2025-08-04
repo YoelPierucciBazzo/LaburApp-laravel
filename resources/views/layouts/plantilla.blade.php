@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
+
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="storage/imagenes/logo.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
     <title>@yield('titulo')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Trabajos y emprendimientos">

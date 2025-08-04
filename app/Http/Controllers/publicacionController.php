@@ -44,9 +44,12 @@ class publicacionController extends Controller
     }
 
     public function misPublicaciones() {
-        $publicaciones = Publicacion::where('id_usuario', Auth::user()->id_usuario)->with('profesion')->get();
-        return view('laburapp.misPublicaciones', compact('publicaciones'));}
-
+        if (Auth::check()) {
+            $publicaciones = Publicacion::where('id_usuario', Auth::user()->id_usuario)->with('profesion')->get();
+            return view('laburapp.misPublicaciones', compact('publicaciones'));
+        } else {
+            return redirect()->route('inicioSesion.form')->withErrors(['error' => 'Debes iniciar sesión para ver tus publicaciones.']); }
+        }
 
     // Método para eliminar una publicación
     

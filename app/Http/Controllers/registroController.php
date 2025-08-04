@@ -26,7 +26,7 @@ public function guardarUsuario(Request $request)
         'mail' => 'required|email',
         'telefono' => 'required',
         'localidad' => 'required',
-        'imagen' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
     ]);
 
     // Guardar imagen
@@ -49,8 +49,6 @@ public function guardarUsuario(Request $request)
         'informacion' => '',
         'id_rating' => null,
     ]);
-
     return redirect()->route('inicioSesion.usuario')->with('success', 'Usuario registrado correctamente');
 }
-
 }

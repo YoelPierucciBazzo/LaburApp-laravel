@@ -9,7 +9,7 @@
 </head>
 <body>
 
-        <div class="centrar">
+    <div class="centrar">
         <h1> Registro de Usuario </h1>
     <div>
     </div>
