@@ -38,8 +38,11 @@
             </div>
 
             <div class="contenedor-input">
-                <h3>Confirmar Contraseña</h3>
-                <input type="password" name="nueva-contraseña_confirmation">
+            <h3>Confirmar Contraseña</h3>
+            <input id="pass" type="password" name="nueva-contraseña_confirmation">
+            <p class="eye">
+            <img src="{{ asset('/storage/imagenes/ojo-cerrado.png') }}" alt="Mostrar contraseña">
+            </p>
             </div>
 
             <!-- INFORMACIÓN -->
@@ -104,7 +107,6 @@ function previewImage(event) {
     }
 }
 </script>
-
 @endsection
 
 

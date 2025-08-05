@@ -7,6 +7,7 @@
     <title>Inicio de sesión</title>
     <meta name="description" content="Trabajos y emprendimientos">
     <meta name="keywords" content="Trabajo, empleo, rubro, emprendimiento, laburo">
+    <script src="{{  asset('js/script.js')}}"></script>
 </head>
 <body>
 @if (session('success'))
@@ -29,9 +30,9 @@
                 <br> <br>
                 Contraseña <br>
                 <div class="input-row">
-                    <input id="pass" type="password" placeholder="Contraseña..." name="pass" minlength="4" maxlength="10" required>
+                    <input id="pass" type="text" placeholder="Contraseña..." name="pass" minlength="4" maxlength="10" required>
                     <p class="eye">
-                        <img src="{{ asset('imagenes/ojo-cerrado.png') }}" alt="Mostrar contraseña">
+                        <img src="{{ asset('/storage/imagenes/ojo-cerrado.png') }}" alt="Mostrar contraseña">
                     </p>
                 </div>
                 <br> <br>
@@ -44,7 +45,7 @@
     </main> 
     <footer> 
         <h3 id="derecho"></h3>
-        <a target="_blank" href="https://www.whatsapp.com/?lang=es_LA"><img class="btn-wsp" src="{{ asset('imagenes/wsp.png') }}" alt="Logo de wsp"> </a>
+        <a target="_blank" href="https://www.whatsapp.com/?lang=es_LA"><img class="btn-wsp" src="{{ asset('/storage/imagenes/wsp.png') }}" alt="Logo de wsp"> </a>
     </footer>
 </body>
 </html>

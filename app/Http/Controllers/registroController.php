@@ -26,9 +26,8 @@ public function guardarUsuario(Request $request)
         'mail' => 'required|email',
         'telefono' => 'required',
         'localidad' => 'required',
-        'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'imagen' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
     ]);
-
     // Guardar imagen
     if ($request->hasFile('imagen')) {
         $imagenPath = $request->file('imagen')->store('imagenes', 'public');
