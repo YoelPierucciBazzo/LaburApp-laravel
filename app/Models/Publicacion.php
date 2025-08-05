@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Publicacion extends Model
 {
+    use HasFactory;
     protected $table = 'publicaciones';
     protected $primaryKey = 'id_publicaciones';
 
@@ -28,4 +29,5 @@ class Publicacion extends Model
     public function usuario(){
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
+
 }
