@@ -34,6 +34,8 @@ function verificar() {
     alert("La clave debe tener exactamente 8 caracteres.");
     return false;
     }
+    
+     
 
     let tMayuscula = false;
     let tMinuscula = false;
