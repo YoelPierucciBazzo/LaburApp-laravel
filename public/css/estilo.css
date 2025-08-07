@@ -139,6 +139,7 @@ header .fotoperfil{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1rem;
 }
 
 
@@ -1111,4 +1112,5 @@ footer h3{
     width: 100%; /* Ajustar al ancho del contenedor */
     height: auto; /* Mantener proporción */
 }
+
 }

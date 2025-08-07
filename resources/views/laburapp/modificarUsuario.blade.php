@@ -6,7 +6,7 @@
     <div class="cuadro-modificar-perfil">
         <h1>Modificar Usuario</h1>
 
-        <form action="{{ route('actualizar.usuario') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('actualizar.usuario') }}" method="POST" enctype="multipart/form-data"  onsubmit="return  verificar()"> 
             @csrf
 
             <!-- FOTO DE PERFIL -->
@@ -34,7 +34,7 @@
             <!-- CONTRASEÑA -->
             <div class="contenedor-input">
                 <h3>Nueva Contraseña</h3>
-                <input type="password" name="nueva-contraseña">
+                <input type="password" name="nueva-contraseña" name="pass">
             </div>
 
             <div class="contenedor-input">

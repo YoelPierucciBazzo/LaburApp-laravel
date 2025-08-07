@@ -9,7 +9,7 @@ use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('index', indexController::class)->name('index');
+Route::get('index', [indexController::class,'verTodasPublicaciones'])->name('index');
 
 Route::get('perfil', function(){return view("laburapp.perfil");})->name('perfil');
 

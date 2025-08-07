@@ -30,12 +30,6 @@ textoDerechos.innerHTML = derechos /// lo muestra en el html
 function verificar() {
     let clav = document.getElementById("pass").value;
 
-    if (clav.length !== 8) {
-    alert("La clave debe tener exactamente 8 caracteres.");
-    return false;
-    }
-    
-     
 
     let tMayuscula = false;
     let tMinuscula = false;

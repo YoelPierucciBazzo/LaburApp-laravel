@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +10,8 @@
     <meta name="description" content="Trabajos y emprendimientos">
     <meta name="keywords" content="Trabajo, empleo, rubro, emprendimiento, laburo">
     <script src="{{  asset('js/script.js')}}"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 <body>
 <header>
@@ -37,6 +38,18 @@
         </div>
     </header>
     <main class="cabeceraindex">
+            <style>
+    .page-item.active .page-link {
+        background-color: #333; /* tu color personalizado */
+        border-color: #333; /* borde igual al fondo */
+        color: #f1dabf; /* color del texto */
+    }
+    .page-link {
+    color: #333; /* texto */
+    background-color: #fff; /* fondo */
+    border-color: #333; /* borde */
+}
+</style>
         @yield('contenido')
     </main> 
     <footer> 

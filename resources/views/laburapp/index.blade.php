@@ -1,6 +1,7 @@
 @extends('layouts.plantilla')
 @section('titulo','Bienvenido a LABURAPP')
 
+
 @if (session('success'))
     <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
         {{ session('success') }}
@@ -19,10 +20,19 @@
         </form>
     </div>
     <div class="seccion">
-        <div class="publicaciones"> 
+    <div class="publicaciones">
+        @foreach($publicacionesTotales as $publicacion)
+            <div class="link">
+                <strong>Título:{{ $publicacion->nombre_publicacion }}</strong><br>
+                Descripcion:{{ $publicacion->descripcion }}<br>
+                Profesión: {{ $publicacion->profesion->nombre_profesion ?? 'Sin especificar' }} <br>
+                Usuario: {{ $publicacion->usuario->nombre}} {{$publicacion->usuario->apellido}}<br>
+                <img src="{{ asset('storage/' . $publicacion->foto_portada) }}" alt="Imagen de la publicación" width="150" id="fotopubli"><br>
+                <input type="button" class="boton" value="Ver publicación" onclick="location.href='{{ route('ver.publicacion', $publicacion->id_publicaciones) }}'">
+            </div>
+            @endforeach
         </div>
-        <div class="paginacion">
-        </div>
+            {{$publicacionesTotales->links('pagination::bootstrap-5') }}    
     </div>
     </main> 
     @endsection

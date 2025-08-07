@@ -45,7 +45,7 @@ class publicacionController extends Controller
 
     public function misPublicaciones() {
         if (Auth::check()) {
-            $publicaciones = Publicacion::where('id_usuario', Auth::user()->id_usuario)->with('profesion')->get();
+            $publicaciones = Publicacion::where('id_usuario', Auth::user()->id_usuario)->with('profesion')->paginate(6);
             return view('laburapp.misPublicaciones', compact('publicaciones'));
         } else {
             return redirect()->route('inicioSesion.form')->withErrors(['error' => 'Debes iniciar sesión para ver tus publicaciones.']); }
@@ -126,7 +126,7 @@ public function buscarPublicaciones(Request $request)
     $publicaciones = Publicacion::where('nombre_publicacion', 'like', '%' . $busqueda . '%')
         ->orWhere('descripcion', 'like', '%' . $busqueda . '%')
         ->with(['profesion','usuario'])
-        ->get();
+        ->paginate(6);
 
     return view('laburapp.buscarPublicaciones', compact('publicaciones'));
 }

@@ -30,7 +30,7 @@
                 <br> <br>
                 Contraseña <br>
                 <div class="input-row">
-                    <input id="pass" type="text" placeholder="Contraseña..." name="pass" minlength="4" maxlength="10" required>
+                    <input id="pass" type="password" placeholder="Contraseña..." name="pass" required>
                     <p class="eye">
                         <img src="{{ asset('/storage/imagenes/ojo-cerrado.png') }}" alt="Mostrar contraseña">
                     </p>

@@ -1,7 +1,7 @@
 @extends('layouts.plantilla') 
 @section('titulo', 'Mis Publicaciones')
-
 @section('contenido')
+
     <h1>Mis publicaciones</h1>
 
     @if ($publicaciones->isEmpty())
@@ -28,6 +28,10 @@
                     </div>
                 @endforeach
             </div>
+        </div>
+        <div>
+        {{ $publicaciones->links('pagination::bootstrap-5') }}
+
         </div>
     @endif
 @endsection
