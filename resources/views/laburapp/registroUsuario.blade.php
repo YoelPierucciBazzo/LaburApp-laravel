@@ -8,6 +8,7 @@
     <script src="{{  asset('js/script.js')}}"></script>
     <title>Registro de usuario</title>
 </head>
+
 <body>
 
     <div class="centrar">

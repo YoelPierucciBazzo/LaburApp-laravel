@@ -276,7 +276,14 @@ header .fotoperfil{
     clear: both;
     border-radius: 5%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+}
+
+.usuario{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
 }
 
 .bloque-perfil .fotoperfil{
@@ -309,6 +316,20 @@ header .fotoperfil{
 .barra-superior {
     display: flex;
     flex-direction: column;
+}
+
+.boton-inicio-cerrar-sesion{
+text-decoration: none;
+    color: #dbcdcd;
+    border-radius: 4px;
+    transition: 0.3s;
+    padding-left: 1rem;
+    
+}
+
+.boton-inicio-cerrar-sesion:hover{
+    color: black;
+
 }
 
 

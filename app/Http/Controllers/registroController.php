@@ -19,7 +19,7 @@ public function formularioRegistro()
 
 public function guardarUsuario(Request $request)
 {
-    $request->validate([
+      $request->validate([
         'nombre' => 'required',
         'apellido' => 'required',
         'pass' => 'required',

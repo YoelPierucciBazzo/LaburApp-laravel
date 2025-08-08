@@ -27,44 +27,6 @@ const textoDerechos = document.getElementById('derecho') // se vincula con el id
 textoDerechos.innerHTML = derechos /// lo muestra en el html
 
 
-function verificar() {
-    let clav = document.getElementById("pass").value;
-
-
-    let tMayuscula = false;
-    let tMinuscula = false;
-    let tDigito = false;
-
-    for (let i = 0; i < clav.length; i++) {
-    let letraClav = clav[i];
-
-    if (letraClav >= 'A' && letraClav <= 'Z') {
-        tMayuscula = true;
-    } else if (letraClav >= 'a' && letraClav <= 'z') {
-        tMinuscula = true;
-    } else if (letraClav >= '0' && letraClav <= '9') {
-        tDigito = true;
-    } else {
-        alert("La clave solo debe contener caracteres alfanuméricos.");
-        return false;
-    }
-    }
-
-    if (!tMayuscula || !tMinuscula || !tDigito) {
-    alert("La clave debe contener al menos una letra mayúscula, una letra minúscula y un dígito.");
-    return false;
-    }
-
-    return true;
-}
-
-function hora(){
-    var hora;
-    fecha= new Date();
-    var cadena = fecha.getHours() + '/' + fecha.getMinutes() + '/' + fecha.getSeconds();
-    return cadena;
-}
-
 /* ---------------SCRIPT PARA EL OJO -------------------*/
 
     // Selección de elementos
@@ -102,3 +64,44 @@ function hora(){
                 }} */
 
 })
+
+function verificar() {
+    console.log("Verificando la clave...");
+    let clav = document.getElementById("pass").value;
+
+
+    let tMayuscula = false;
+    let tMinuscula = false;
+    let tDigito = false;
+
+    for (let i = 0; i < clav.length; i++) {
+    let letraClav = clav[i];
+
+    if (letraClav >= 'A' && letraClav <= 'Z') {
+        tMayuscula = true;
+    } else if (letraClav >= 'a' && letraClav <= 'z') {
+        tMinuscula = true;
+    } else if (letraClav >= '0' && letraClav <= '9') {
+        tDigito = true;
+    } else {
+        alert("La clave solo debe contener caracteres alfanuméricos.");
+        return false;
+    }
+    }
+
+    if (!tMayuscula || !tMinuscula || !tDigito) {
+    alert("La clave debe contener al menos una letra mayúscula, una letra minúscula y un dígito.");
+    return false;
+    }
+
+    return true;
+}
+
+function hora(){
+    var hora;
+    fecha= new Date();
+    var cadena = fecha.getHours() + '/' + fecha.getMinutes() + '/' + fecha.getSeconds();
+    return cadena;
+}
+
+

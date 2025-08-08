@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Trabajos y emprendimientos">
     <meta name="keywords" content="Trabajo, empleo, rubro, emprendimiento, laburo">
-    <script src="{{  asset('js/script.js')}}"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
@@ -23,31 +22,32 @@
                     <li><a href="{{  route('index')}}" alt="indice">Principal</a></li>
                     <li><a href="{{ route ('perfil')}}" alt="Ver Perfil">Ver Perfil</a></li>
                     <li><a href="{{  route('misPublicaciones')}}" alt="Ver publicaciones"> Mis publicaciones</a></li>
-                    @auth
-                    <li><a href="{{ route('cerrarSesion.usuario') }}" alt="CERRAR SESIÓN">Cerrar sesión</a></li>
-                    <p>Bienvenido, {{ auth()->user()->nombre }} {{ auth()->user()->apellido }}</p>
-                    <img src="{{ asset('storage/' . auth()->user()->foto_perfil )}}" alt="Foto de perfil" width="100">
-                    @else
-                    <p>No hay usuario logueado.</p>
-                    <a href="{{ route('inicioSesion.form') }}">Iniciar sesión</a>
-                    @endauth         
-                </ul>
+                    </ul>
             </nav>
             <div class="perfil"> 
-            
+                    @auth
+                    <div class="usuario">
+                    <p>Bienvenido, {{ auth()->user()->nombre }} {{ auth()->user()->apellido }}</p>
+                    <a class="boton-inicio-cerrar-sesion" href="{{ route('cerrarSesion.usuario') }}" alt="CERRAR SESIÓN">Cerrar sesión</a>
+                    </div>
+                    <img src="{{ asset('storage/' . auth()->user()->foto_perfil )}}" alt="Foto de perfil" width="33%">
+                    @else
+                    <a class="boton-inicio-cerrar-sesion" href="{{ route('inicioSesion.form') }}">Iniciar sesión</a>
+                    <p>No hay usuario logueado.</p>
+                    @endauth     
         </div>
     </header>
     <main class="cabeceraindex">
             <style>
     .page-item.active .page-link {
-        background-color: #333; /* tu color personalizado */
-        border-color: #333; /* borde igual al fondo */
-        color: #f1dabf; /* color del texto */
+        background-color: #333;
+        border-color: #333;
+        color: #f1dabf;
     }
     .page-link {
-    color: #333; /* texto */
-    background-color: #fff; /* fondo */
-    border-color: #333; /* borde */
+    color: #333;
+    background-color: #fff;
+    border-color: #333;
 }
 </style>
         @yield('contenido')
@@ -55,4 +55,5 @@
     <footer> 
         <h3 id="derecho"></h3>
         <a target="_blank" href="https://www.whatsapp.com/?lang=es_LA"><img class="btn-wsp" src="storage/imagenes/wsp.png" alt="Logo de wsp"> </a>
+        <script src="{{  asset('js/script.js')}}"></script>
     </footer>
