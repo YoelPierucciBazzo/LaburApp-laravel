@@ -67,43 +67,39 @@ textoDerechos.innerHTML = derechos /// lo muestra en el html
 
 function verificar() {
     console.log("Verificando la clave...");
-    let clav = document.getElementById("pass").value;
-    
+    let clav = document.getElementById("pass").value.trim();
+
+    // Si está vacío, no valida nada (sirve para "modificar usuario" sin cambiar la clave)
+    if (clav === "") {
+        return true;
+    }
+
     let tMayuscula = false;
     let tMinuscula = false;
     let tDigito = false;
 
     for (let i = 0; i < clav.length; i++) {
-    let letraClav = clav[i];
+        let letraClav = clav[i];
 
-    if (letraClav >= 'A' && letraClav <= 'Z') {
-        tMayuscula = true;
-    } else if (letraClav >= 'a' && letraClav <= 'z') {
-        tMinuscula = true;
-    } else if (letraClav >= '0' && letraClav <= '9') {
-        tDigito = true;
-    } else {
-        alert("La clave solo debe contener caracteres alfanuméricos.");
-        return false;
-    }
+        if (letraClav >= 'A' && letraClav <= 'Z') {
+            tMayuscula = true;
+        } else if (letraClav >= 'a' && letraClav <= 'z') {
+            tMinuscula = true;
+        } else if (letraClav >= '0' && letraClav <= '9') {
+            tDigito = true;
+        } else {
+            alert("La clave solo debe contener caracteres alfanuméricos.");
+            return false;
+        }
     }
 
     if (!tMayuscula || !tMinuscula || !tDigito) {
-    alert("La clave debe contener al menos una letra mayúscula, una letra minúscula y un dígito.");
-    return false;
+        alert("La clave debe contener al menos una letra mayúscula, una letra minúscula y un dígito.");
+        return false;
     }
 
     return true;
 }
-
-
-
-// Validar coincidencia solo en el segundo campo
-pass2.addEventListener('input', function() {
-    if (this.value.trim() && pass1.value.trim() && this.value !== pass1.value) {
-        alert("Las contraseñas no coinciden.");
-    }
-});
 
 function hora(){
     var hora;
