@@ -34,16 +34,16 @@
             <!-- CONTRASEÑA -->
             <div class="contenedor-input">
                 <h3>Nueva Contraseña</h3>
-                <input type="password" name="nueva-contraseña" name="pass">
-            </div>
-
-            <div class="contenedor-input">
-            <h3>Confirmar Contraseña</h3>
-            <input id="pass" type="password" name="nueva-contraseña_confirmation">
-            <p class="eye">
+                <input type="password" name="nueva-contraseña" id="pass" name="pass">
+                            <p class="eye">
             <img src="{{ asset('/storage/imagenes/ojo-cerrado.png') }}" alt="Mostrar contraseña">
             </p>
             </div>
+
+{{--             <div class="contenedor-input">
+            <h3>Confirmar Contraseña</h3>
+            <input id="pass1" type="password" name="nueva-contraseña_confirmation">
+            </div> --}}
 
             <!-- INFORMACIÓN -->
             <div class="contenedor-input">

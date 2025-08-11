@@ -18,8 +18,8 @@ public function formularioRegistro()
 }
 
 public function guardarUsuario(Request $request)
-{
-      $request->validate([
+{ 
+        $request->validate([
         'nombre' => 'required',
         'apellido' => 'required',
         'pass' => 'required',
@@ -28,6 +28,11 @@ public function guardarUsuario(Request $request)
         'localidad' => 'required',
         'imagen' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
     ]);
+     if ($request->hasFile('imagen') && $request->file('imagen')->getSize() > 2048 * 1024) {
+        return redirect()->back()
+            ->withErrors(['imagen' => 'La imagen no debe superar los 2MB'])
+            ->withInput();
+    }
     // Guardar imagen
     if ($request->hasFile('imagen')) {
         $imagenPath = $request->file('imagen')->store('imagenes', 'public');

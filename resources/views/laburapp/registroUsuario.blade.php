@@ -19,6 +19,9 @@
         @csrf
             <div class='contenedor-input'>
                 <h3>Foto de perfil</h3><h6>Solo imagenes tipo "jpg/jpeg"</h6> <input type="file" name="imagen" >
+                @error('imagen')
+                <div class="alert alert-danger mt-2"><p>La imagen no debe ser mayor a 2MB</p></div>
+                @enderror
             </div>
             <div class='contenedor-input'>
                 <h3>Nombre</h3> <input type="text" placeholder="Ingrese su nombre..." name="nombre" id="nombre"  required autofocus>
@@ -51,7 +54,7 @@
             <br>
                 <a href="{{ url('index') }}"><h4>Volver al inicio</h4></a>
         </form>
-    <footer> 
+    <footer>
         <h3 id="derecho"></h3>
         <a target="_blank" href="https://www.whatsapp.com/?lang=es_LA"><img class="btn-wsp" src="storage/imagenes/wsp.png" alt="Logo de wsp"> </a>
     </footer>

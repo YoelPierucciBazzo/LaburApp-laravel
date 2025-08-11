@@ -68,8 +68,7 @@ textoDerechos.innerHTML = derechos /// lo muestra en el html
 function verificar() {
     console.log("Verificando la clave...");
     let clav = document.getElementById("pass").value;
-
-
+    
     let tMayuscula = false;
     let tMinuscula = false;
     let tDigito = false;
@@ -96,6 +95,15 @@ function verificar() {
 
     return true;
 }
+
+
+
+// Validar coincidencia solo en el segundo campo
+pass2.addEventListener('input', function() {
+    if (this.value.trim() && pass1.value.trim() && this.value !== pass1.value) {
+        alert("Las contraseñas no coinciden.");
+    }
+});
 
 function hora(){
     var hora;

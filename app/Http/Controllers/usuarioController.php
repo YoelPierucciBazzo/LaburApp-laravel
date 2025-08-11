@@ -22,7 +22,7 @@ class usuarioController extends Controller
             'domicilio' => 'nullable|string|max:255',
             'mail' => 'required|email|max:255',
             'id_localidad' => 'required|exists:localidades,id_localidad',
-            'nueva-contraseña' => 'nullable|string|confirmed',
+            'nueva-contraseña' => 'nullable|string',
         ]);
 
         /** @var \App\Models\Usuario $usuario */
